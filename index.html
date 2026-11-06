@@ -8,111 +8,110 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
-  :root{--ink:#2a2226;--rose:#7a2f4a}
+  :root{--olive:#6b7b3a;--olive-dk:#55632b;--gold:#a8905e;--ink:#5f5a48}
   *{box-sizing:border-box;margin:0}
-  html,body{height:100%;background:#1c1418;overflow:hidden}
+  html,body{height:100%;background:#1c1a14;overflow:hidden}
   body{display:flex;align-items:center;justify-content:center}
   /* 16:9 stage scaled to the screen via container units */
   #stage{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;container-type:size;overflow:hidden;
-    background:radial-gradient(60% 70% at 50% 50%,#f6fbff 0%,#eef6fb 45%,#fbeaf1 100%);
+    background:radial-gradient(55% 65% at 50% 50%,#fffdf8 0%,#fbf8f0 55%,#f3eee2 100%);
     font-family:'Cormorant Garamond',serif;color:var(--ink)}
-  .wash{position:absolute;border-radius:50%;filter:blur(3cqw);opacity:.55}
-  .w1{left:-6%;top:-10%;width:40%;height:55%;background:#f7c6d6}
-  .w2{right:-8%;bottom:-12%;width:42%;height:60%;background:#f4b3c9}
-  .w3{left:30%;top:60%;width:30%;height:40%;background:#dfeaf6;opacity:.7}
-  .w4{right:12%;top:-15%;width:30%;height:40%;background:#fbd9e4}
   svg.deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
   .card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2}
-  .title{font-family:'Allura',cursive;font-weight:400;font-size:8cqw;line-height:1;color:var(--rose);animation:rise 1.4s both}
-  .of{font-family:'Allura',cursive;font-size:5.4cqw;line-height:1;margin:1cqw 0 2cqw;animation:rise 1.4s .25s both}
-  .name{font-weight:600;font-size:4.6cqw;letter-spacing:.06em;line-height:1.35;animation:rise 1.4s .5s both}
-  .amp{font-size:4.6cqw;font-weight:600;animation:rise 1.4s .65s both}
-  .date{margin-top:3cqw;font-size:2cqw;letter-spacing:.14em;font-weight:600;animation:rise 1.4s .9s both}
-  .tag{margin-top:1.6cqw;font-family:'Great Vibes',cursive;font-size:2.4cqw;color:#6b5560;animation:rise 1.4s 1.1s both}
+  .title{font-family:'Allura',cursive;font-weight:400;font-size:8cqw;line-height:1;color:var(--olive);animation:rise 1.4s both}
+  .of{font-family:'Allura',cursive;font-size:5.4cqw;line-height:1;margin:1cqw 0 2cqw;color:var(--gold);animation:rise 1.4s .25s both}
+  .name{font-weight:600;font-size:4.6cqw;letter-spacing:.06em;line-height:1.35;color:var(--olive-dk);animation:rise 1.4s .5s both}
+  .amp{font-size:4.6cqw;font-weight:600;color:var(--gold);animation:rise 1.4s .65s both}
+  .date{margin-top:3cqw;font-size:2cqw;letter-spacing:.14em;font-weight:600;color:var(--ink);animation:rise 1.4s .9s both}
+  .tag{margin-top:1.6cqw;font-family:'Great Vibes',cursive;font-size:2.4cqw;color:#8d7b5a;animation:rise 1.4s 1.1s both}
   @keyframes rise{from{opacity:0;transform:translateY(2cqw)}to{opacity:1;transform:none}}
-  .petal{position:absolute;top:-6cqw;width:2cqw;height:2.6cqw;border-radius:100% 0 100% 0;
-    background:linear-gradient(135deg,#ffd3e1,#f08fb0);opacity:.8;z-index:1;animation:fall linear infinite}
-  @keyframes fall{to{transform:translate(var(--dx),115cqh) rotate(var(--rot))}}
+
+  /* butterflies: JS moves the container, CSS flaps the wings */
+  .bf{position:absolute;left:0;top:0;width:3.6cqw;z-index:3;pointer-events:none;will-change:transform}
+  .bf svg{display:block;width:100%;overflow:visible;filter:drop-shadow(0 .4cqw .35cqw #5a4a3026)}
+  .bf .wing{transform-box:view-box;transform-origin:50px 40px;animation:flap var(--flap,.22s) ease-in-out infinite alternate}
+  @keyframes flap{to{transform:scaleX(.18)}}
+
   #fs{position:fixed;right:16px;bottom:16px;z-index:9;display:flex;align-items:center;gap:8px;
-    border:1px solid #fff8;border-radius:999px;padding:10px 18px;background:#7a2f4acc;color:#fff;
+    border:1px solid #fff8;border-radius:999px;padding:10px 18px;background:#6b7b3acc;color:#fff;
     font:600 14px/1 system-ui,sans-serif;letter-spacing:.03em;cursor:pointer;
     box-shadow:0 4px 16px #0004;backdrop-filter:blur(6px);transition:opacity .4s,transform .2s}
-  #fs:hover{transform:scale(1.05);background:#7a2f4a}
+  #fs:hover{transform:scale(1.05);background:#6b7b3a}
   #fs svg{width:18px;height:18px}
   body.idle #fs{opacity:0}
   body.idle{cursor:none}
-  @media (prefers-reduced-motion:reduce){.petal{display:none}*{animation:none!important}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
 <div id="stage">
-  <div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><div class="wash w4"></div>
-
-  <svg class="deco" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+  <svg class="deco" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <defs>
-      <radialGradient id="pg" cx="50%" cy="85%" r="90%">
-        <stop offset="0" stop-color="#f06292"/><stop offset=".55" stop-color="#f8a8c5"/><stop offset="1" stop-color="#fde0ea"/>
-      </radialGradient>
-      <radialGradient id="pg2" cx="50%" cy="85%" r="90%">
-        <stop offset="0" stop-color="#e0407f"/><stop offset=".6" stop-color="#f48fb1"/><stop offset="1" stop-color="#fbd0df"/>
-      </radialGradient>
-      <g id="bloom">
-        <g fill="url(#pg)" stroke="#e8799f" stroke-width="1" stroke-opacity=".35">
-          <ellipse cx="0" cy="-62" rx="34" ry="66"/>
-          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(45)"/>
-          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(90)"/>
-          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(135)"/>
-          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(180)"/>
-          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(225)"/>
-          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(270)"/>
-          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(315)"/>
+      <radialGradient id="wr"><stop offset="0" stop-color="#fffefb"/><stop offset=".6" stop-color="#f8f4ec"/><stop offset="1" stop-color="#e3dccd"/></radialGradient>
+      <radialGradient id="pr"><stop offset="0" stop-color="#fff2f4"/><stop offset=".55" stop-color="#f6cbd5"/><stop offset="1" stop-color="#e49cb1"/></radialGradient>
+      <radialGradient id="br"><stop offset="0" stop-color="#fffaf5"/><stop offset=".6" stop-color="#f6e2d8"/><stop offset="1" stop-color="#e5bfae"/></radialGradient>
+      <radialGradient id="shade"><stop offset="0" stop-color="#8a6a4a" stop-opacity=".22"/><stop offset="1" stop-color="#8a6a4a" stop-opacity="0"/></radialGradient>
+      <radialGradient id="glow"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+      <linearGradient id="lg1" x1="0" x2="1"><stop offset="0" stop-color="#8ea567"/><stop offset="1" stop-color="#b9c99a"/></linearGradient>
+      <linearGradient id="lg2" x1="0" x2="1"><stop offset="0" stop-color="#a9bb86"/><stop offset="1" stop-color="#d3dcbd"/></linearGradient>
+      <filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 .45  0 0 0 0 .4  0 0 0 0 .3  0 0 0 .5 0"/></filter>
+
+      <!-- rose: fill and stroke come from the <use> -->
+      <g id="rose">
+        <g>
+          <ellipse cy="-34" rx="26" ry="30"/><ellipse cy="-34" rx="26" ry="30" transform="rotate(45)"/>
+          <ellipse cy="-34" rx="26" ry="30" transform="rotate(90)"/><ellipse cy="-34" rx="26" ry="30" transform="rotate(135)"/>
+          <ellipse cy="-34" rx="26" ry="30" transform="rotate(180)"/><ellipse cy="-34" rx="26" ry="30" transform="rotate(225)"/>
+          <ellipse cy="-34" rx="26" ry="30" transform="rotate(270)"/><ellipse cy="-34" rx="26" ry="30" transform="rotate(315)"/>
         </g>
-        <g fill="url(#pg2)" opacity=".85">
-          <ellipse cx="0" cy="-34" rx="20" ry="38" transform="rotate(22)"/>
-          <ellipse cx="0" cy="-34" rx="20" ry="38" transform="rotate(112)"/>
-          <ellipse cx="0" cy="-34" rx="20" ry="38" transform="rotate(202)"/>
-          <ellipse cx="0" cy="-34" rx="20" ry="38" transform="rotate(292)"/>
+        <circle r="34" fill="url(#shade)" stroke="none"/>
+        <g transform="rotate(25)">
+          <ellipse cy="-19" rx="19" ry="21"/><ellipse cy="-19" rx="19" ry="21" transform="rotate(72)"/>
+          <ellipse cy="-19" rx="19" ry="21" transform="rotate(144)"/><ellipse cy="-19" rx="19" ry="21" transform="rotate(216)"/>
+          <ellipse cy="-19" rx="19" ry="21" transform="rotate(288)"/>
         </g>
-        <circle r="13" fill="#f9c74f" opacity=".9"/>
-        <path d="M0 0v-24M0 0l17-17M0 0h24M0 0l17 17M0 0v24M0 0l-17 17M0 0h-24M0 0l-17-17" stroke="#d98a2b" stroke-width="2" stroke-linecap="round"/>
+        <circle r="20" fill="url(#shade)" stroke="none"/>
+        <circle r="13"/>
+        <path d="M-8 3C-9-8 8-10 9 1C10 9-3 11-5 4C-6-1 3-3 3 2" fill="none"/>
       </g>
-      <g id="sprig" stroke="#e8799f" stroke-linecap="round" fill="none">
-        <path d="M0 0C10-40 30-70 60-90" stroke-width="3" stroke="#a5c79a"/>
-        <path d="M60-90l-14-26M60-90l6-30M60-90l24-22M60-90l-30-10M60-90l30 4" stroke-width="2.5"/>
-        <g fill="#f06292" stroke="none"><circle cx="46" cy="-116" r="4"/><circle cx="66" cy="-120" r="4"/><circle cx="84" cy="-112" r="4"/><circle cx="30" cy="-100" r="4"/><circle cx="90" cy="-86" r="4"/></g>
+      <g id="daisy">
+        <g fill="#fffdf8" stroke="#e2dac8" stroke-width="1">
+          <ellipse cy="-14" rx="6" ry="13"/><ellipse cy="-14" rx="6" ry="13" transform="rotate(45)"/>
+          <ellipse cy="-14" rx="6" ry="13" transform="rotate(90)"/><ellipse cy="-14" rx="6" ry="13" transform="rotate(135)"/>
+          <ellipse cy="-14" rx="6" ry="13" transform="rotate(180)"/><ellipse cy="-14" rx="6" ry="13" transform="rotate(225)"/>
+          <ellipse cy="-14" rx="6" ry="13" transform="rotate(270)"/><ellipse cy="-14" rx="6" ry="13" transform="rotate(315)"/>
+        </g>
+        <circle r="6" fill="#f0c24a" stroke="#d6a232"/>
       </g>
-      <g id="leaf" fill="#a9cfa0" opacity=".85"><path d="M0 0C30-30 80-30 110 0C80 30 30 30 0 0Z"/></g>
+      <g id="buds" fill="#f3cf5a" stroke="#d6a838" stroke-width="1">
+        <circle cx="0" cy="0" r="5"/><circle cx="12" cy="-6" r="4.5"/><circle cx="-11" cy="-8" r="4"/><circle cx="5" cy="-17" r="4.5"/>
+        <circle cx="-4" cy="11" r="4"/><circle cx="14" cy="8" r="3.5"/><circle cx="-15" cy="5" r="3.5"/><circle cx="20" cy="-16" r="3"/>
+        <circle cx="-7" cy="-22" r="3"/><circle cx="24" cy="2" r="3"/>
+      </g>
+      <g id="lilac" fill="#dccdee" stroke="#c0aee0" stroke-width="1">
+        <circle cy="-6" r="5"/><circle cx="6" cy="-2" r="5"/><circle cx="4" cy="5" r="5"/><circle cx="-4" cy="5" r="5"/><circle cx="-6" cy="-2" r="5"/>
+        <circle r="2.5" fill="#f6e7a6" stroke="none"/>
+      </g>
+      <g id="leaf"><path d="M0 0C20-15 55-17 82 0C55 17 20 15 0 0Z"/><path d="M5 0H76" stroke="#ffffff66" stroke-width="1.5" fill="none"/></g>
+      <g id="sprig" fill="none" stroke="#93a86e" stroke-width="2.5" stroke-linecap="round">
+        <path d="M0 0C10-40 30-75 62-105"/>
+        <g fill="#b3c48f" stroke="none">
+          <ellipse cx="12" cy="-28" rx="5" ry="11" transform="rotate(-50 12 -28)"/><ellipse cx="4" cy="-36" rx="5" ry="11" transform="rotate(30 4 -36)"/>
+          <ellipse cx="28" cy="-58" rx="5" ry="11" transform="rotate(-45 28 -58)"/><ellipse cx="18" cy="-66" rx="5" ry="11" transform="rotate(35 18 -66)"/>
+          <ellipse cx="46" cy="-86" rx="5" ry="11" transform="rotate(-40 46 -86)"/><ellipse cx="38" cy="-96" rx="5" ry="11" transform="rotate(40 38 -96)"/>
+          <ellipse cx="62" cy="-110" rx="5" ry="10" transform="rotate(45 62 -110)"/>
+        </g>
+      </g>
+
+      <!-- one floral side, built from LAYOUT below; drawn twice (left, and rotated 180deg on the right) -->
+      <g id="side"></g>
     </defs>
 
-    <!-- bottom-left cluster -->
-    <use href="#leaf" transform="translate(40,620) rotate(-70) scale(1.1)"/>
-    <use href="#leaf" transform="translate(60,860) rotate(-20) scale(1.2)"/>
-    <use href="#bloom" transform="translate(70,730) scale(1.55) rotate(10)"/>
-    <use href="#bloom" transform="translate(250,900) scale(1.15) rotate(40)"/>
-    <use href="#bloom" transform="translate(30,520) scale(.75) rotate(70)"/>
-    <use href="#sprig" transform="translate(190,860) scale(1.1)"/>
-
-    <!-- top-right cluster -->
-    <use href="#leaf" transform="translate(1560,260) rotate(120) scale(1.1)"/>
-    <use href="#leaf" transform="translate(1330,40) rotate(40) scale(1.1)"/>
-    <use href="#bloom" transform="translate(1530,110) scale(1.7) rotate(-15)"/>
-    <use href="#bloom" transform="translate(1590,330) scale(1.05) rotate(25)"/>
-    <use href="#bloom" transform="translate(1350,20) scale(.85) rotate(60)"/>
-    <use href="#sprig" transform="translate(1560,380) scale(-.9,.9) rotate(-10)"/>
-
-    <!-- accents -->
-    <use href="#bloom" transform="translate(30,30) scale(.7) rotate(15)"/>
-    <use href="#sprig" transform="translate(150,10) scale(.8,-.8) rotate(10)"/>
-    <use href="#bloom" transform="translate(1590,880) scale(.9) rotate(30)"/>
-    <use href="#bloom" transform="translate(1440,900) scale(.65)"/>
-
-    <!-- ribbons -->
-    <g fill="none" stroke="#c88ac0" stroke-linecap="round" opacity=".7">
-      <path d="M190 250C260 340 170 420 250 520" stroke-width="6"/>
-      <path d="M205 250C285 340 195 420 270 520" stroke-width="2"/>
-      <path d="M1400 120C1330 220 1420 330 1350 450" stroke-width="6"/>
-      <path d="M1415 120C1345 220 1435 330 1365 450" stroke-width="2"/>
-    </g>
+    <rect width="1600" height="900" filter="url(#paper)" opacity=".06"/>
+    <ellipse cx="150" cy="450" rx="260" ry="520" fill="url(#glow)"/>
+    <ellipse cx="1450" cy="450" rx="260" ry="520" fill="url(#glow)"/>
+    <use href="#side"/>
+    <use href="#side" transform="translate(1600,900) rotate(180)"/>
   </svg>
 
   <main class="card">
@@ -163,16 +162,103 @@
   [['n1','n1'],['n2','n2'],['d','date'],['tg','tag'],['t','title']].forEach(([id,k])=>{
     if (q.get(k)) document.getElementById(id).textContent = q.get(k);
   });
-  const st = document.getElementById('stage');
-  for (let i=0;i<14;i++){
-    const p = document.createElement('i'); p.className='petal';
-    p.style.left = Math.random()*100+'%';
-    p.style.setProperty('--dx',(Math.random()*16-8)+'cqw');
-    p.style.setProperty('--rot',(Math.random()*720-360)+'deg');
-    p.style.animationDuration = (11+Math.random()*10)+'s';
-    p.style.animationDelay = (-Math.random()*20)+'s';
-    st.appendChild(p);
+
+  // ---- Floral side (left edge, 0..300 x 0..900); back to front ----
+  const LAYOUT = [
+    // [shape, x, y, scale, rotate, fill]
+    ['leaf',120,40,1.2,20,'lg1'],['leaf',200,120,1,-10,'lg2'],['leaf',10,180,1.1,60,'lg1'],['leaf',230,260,1.1,15,'lg2'],
+    ['leaf',150,380,1.2,-30,'lg1'],['leaf',240,470,1,10,'lg2'],['leaf',20,560,1,70,'lg2'],['leaf',210,620,1.2,-20,'lg1'],
+    ['leaf',130,760,1.1,30,'lg2'],['leaf',230,840,1,-15,'lg1'],['leaf',60,300,1,110,'lg1'],['leaf',90,660,1.1,120,'lg2'],
+    ['leaf',260,180,.8,-40,'lg1'],['leaf',270,700,.9,20,'lg2'],
+    ['sprig',230,70,1,-10],['sprig',265,410,1.1,15],['sprig',250,790,1,-25],['sprig',40,900,1,-75],
+    ['rose',60,60,1.5,10,'wr'],['rose',190,40,.9,40,'pr'],['rose',30,230,1.1,0,'pr'],['rose',150,250,1.35,20,'wr'],
+    ['rose',70,410,1.2,50,'br'],['rose',195,520,.95,10,'pr'],['rose',50,600,1.5,30,'wr'],['rose',170,705,1.1,0,'wr'],
+    ['rose',40,800,1.1,70,'pr'],['rose',160,880,1.4,20,'wr'],
+    ['daisy',235,190,1,0],['daisy',112,150,.8,20],['daisy',255,350,.9,10],['daisy',135,525,.8,30],
+    ['daisy',262,610,1,5],['daisy',105,862,.8,15],['daisy',235,765,.9,25],
+    ['buds',175,160,1,0],['buds',222,425,1,40],['buds',122,625,1,10],['buds',252,690,.9,70],['buds',95,330,.9,20],['buds',230,880,1,0],
+    ['lilac',22,470,1,0],['lilac',205,320,1,20],['lilac',122,782,1.1,0],['lilac',250,545,.9,0],
+  ];
+  const STROKE = {wr:'#ddd5c4', pr:'#d98ea4', br:'#d9b2a2'};
+  const NS = 'http://www.w3.org/2000/svg';
+  const side = document.getElementById('side');
+  for (const [shape,x,y,s,r,fill] of LAYOUT){
+    const u = document.createElementNS(NS,'use');
+    u.setAttribute('href','#'+shape);
+    u.setAttribute('transform',`translate(${x},${y}) rotate(${r}) scale(${s})`);
+    if (fill){ u.setAttribute('fill',`url(#${fill})`); }
+    if (shape==='rose'){ u.setAttribute('stroke',STROKE[fill]); u.setAttribute('stroke-width','1.2'); }
+    side.appendChild(u);
   }
+
+  // ---- Butterflies ----
+  const st = document.getElementById('stage');
+  const wing = (c1,c2) => `
+    <path d="M50 38C38 6 8 0 6 20C5 34 28 41 50 40Z" fill="${c1}" stroke="${c2}" stroke-width="1.6"/>
+    <path d="M50 42C32 43 14 56 20 68C26 79 44 64 50 46Z" fill="${c1}" stroke="${c2}" stroke-width="1.6"/>
+    <path d="M44 34C34 18 18 12 14 20" fill="none" stroke="${c2}" stroke-width="1" opacity=".6"/>
+    <circle cx="14" cy="17" r="2.6" fill="#fff" opacity=".85"/><circle cx="21" cy="11" r="1.8" fill="#fff" opacity=".85"/>
+    <circle cx="25" cy="62" r="2.2" fill="#fff" opacity=".8"/>`;
+  const bfSvg = (c1,c2) => `<svg viewBox="0 0 100 80">
+    <g class="wing">${wing(c1,c2)}</g>
+    <g class="wing"><g transform="translate(100 0) scale(-1 1)">${wing(c1,c2)}</g></g>
+    <ellipse cx="50" cy="44" rx="2.6" ry="15" fill="#4a3a30"/><circle cx="50" cy="28" r="3" fill="#4a3a30"/>
+    <path d="M49 26C46 18 42 14 39 12M51 26C54 18 58 14 61 12" fill="none" stroke="#4a3a30" stroke-width="1.2" stroke-linecap="round"/>
+  </svg>`;
+  const COLORS = [['#f28aa5','#c94a6a'],['#f6a08a','#d2603f'],['#f4b8c9','#d07592'],['#f7c56f','#cf8f2c'],['#ee93b0','#bf4f78']];
+  const HOMES = [[.11,.28],[.89,.72],[.13,.74],[.87,.27],[.5,.12]];
+  const ASPECT = 16/9;
+  const bfs = HOMES.map(([hx,hy],i) => {
+    const el = document.createElement('div'); el.className='bf';
+    el.innerHTML = bfSvg(...COLORS[i]);
+    el.style.width = (4.2 + Math.random()*1.6) + 'cqw';
+    st.appendChild(el);
+    return {el, hx, hy, tx:hx, ty:hy, x:hx+(Math.random()-.5)*.1, y:hy+(Math.random()-.5)*.1,
+            a:Math.random()*6.28, ph:Math.random()*10, timer:2+Math.random()*6, rest:0, flap:.18+Math.random()*.08};
+  });
+  const wrap = d => Math.atan2(Math.sin(d), Math.cos(d));
+  function pickTarget(b){
+    if (Math.random() < .25){ // wander anywhere, sometimes across the screen
+      b.tx = .08 + Math.random()*.84; b.ty = .1 + Math.random()*.8;
+    } else {                  // stay near its own flowers
+      b.tx = b.hx + (Math.random()-.5)*.14; b.ty = b.hy + (Math.random()-.5)*.3;
+    }
+    b.timer = 5 + Math.random()*8;
+  }
+  let W = st.clientWidth, H = st.clientHeight;
+  new ResizeObserver(() => { W = st.clientWidth; H = st.clientHeight; }).observe(st);
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let last = performance.now();
+  function frame(now){
+    const dt = Math.min(.05, (now - last) / 1000); last = now; const t = now / 1000;
+    for (const b of bfs){
+      b.timer -= dt;
+      if (b.rest > 0){ // resting on a flower: slow, lazy flaps
+        b.rest -= dt;
+        if (b.rest <= 0) b.el.style.setProperty('--flap', b.flap + 's');
+      } else {
+        if (b.timer <= 0){
+          if (Math.random() < .3 && Math.hypot(b.x-b.hx, b.y-b.hy) < .12){
+            b.rest = 2 + Math.random()*3; b.el.style.setProperty('--flap', '.9s'); b.timer = b.rest + 1;
+          } else pickTarget(b);
+        }
+        const dx = b.tx - b.x, dy = (b.ty - b.y) / ASPECT;
+        const want = Math.atan2(dy, dx), dist = Math.hypot(dx, dy);
+        b.a += (Math.random()-.5) * 4 * dt + Math.sin(t*1.7 + b.ph) * 1.2 * dt;  // flutter
+        b.a += wrap(want - b.a) * Math.min(1, dist*8) * 1.8 * dt;              // steer to target
+        const sp = .05 * (.75 + .35*Math.sin(t*1.3 + b.ph));                   // width per second
+        b.x += Math.cos(b.a) * sp * dt;
+        b.y += Math.sin(b.a) * sp * dt * ASPECT;
+        b.x = Math.max(.02, Math.min(.98, b.x)); b.y = Math.max(.04, Math.min(.96, b.y));
+      }
+      const bob = b.rest > 0 ? 0 : Math.sin(t*7 + b.ph) * .006;
+      const deg = b.a * 180/Math.PI + 90 + Math.sin(t*3 + b.ph) * 8;
+      b.el.style.transform = `translate(${b.x*W}px,${(b.y+bob)*H}px) translate(-50%,-50%) rotate(${deg}deg)`;
+    }
+    if (!still) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  bfs.forEach(b => b.el.style.setProperty('--flap', b.flap + 's'));
 </script>
 </body>
 </html>
