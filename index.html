@@ -12,11 +12,11 @@
   :root{--wine:#7d1430;--wine-dk:#5e0f24;--sage:#6f7f4a;--ink:#4f4440}
   *{box-sizing:border-box;margin:0}
   [hidden]{display:none!important}
-  html,body{height:100%;background:#fff;overflow:hidden}
+  html,body{height:100%;background:#f3efe6;overflow:hidden}
   body{display:flex;align-items:center;justify-content:center}
   /* 16:9 stage scaled to the screen via container units; artwork fills it */
   #stage{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;container-type:size;overflow:hidden;
-    background:#fff url(board.jpg) center/cover no-repeat;
+    background:#f3efe6 url(board.jpg) center/cover no-repeat;
     font-family:'Cormorant Garamond',serif;color:var(--ink)}
   .card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2}
   .title{font-family:'Allura',cursive;font-weight:400;font-size:7.6cqw;line-height:1;color:var(--wine);animation:rise 1.4s both}
