@@ -7,15 +7,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="bg.png">
+<link rel="preload" as="image" href="board.png">
 <style>
   :root{--wine:#7d1430;--wine-dk:#5e0f24;--sage:#6f7f4a;--ink:#4f4440}
   *{box-sizing:border-box;margin:0}
+  [hidden]{display:none!important}
   html,body{height:100%;background:#fff;overflow:hidden}
   body{display:flex;align-items:center;justify-content:center}
   /* 16:9 stage scaled to the screen via container units; artwork fills it */
   #stage{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;container-type:size;overflow:hidden;
-    background:#fff url(bg.png) center/cover no-repeat;
+    background:#fff url(board.png) center/cover no-repeat;
     font-family:'Cormorant Garamond',serif;color:var(--ink)}
   .card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2}
   .title{font-family:'Allura',cursive;font-weight:400;font-size:7.6cqw;line-height:1;color:var(--wine);animation:rise 1.4s both}
@@ -45,7 +46,8 @@
 </head>
 <body>
 <div id="stage">
-  <main class="card">
+  <!-- Text is part of board.png; this HTML version is kept hidden in case it's needed again -->
+  <main class="card" hidden>
     <h1 class="title" id="t">The Engagement</h1>
     <div class="of">of</div>
     <div class="name" id="n1">Atiqah</div>
@@ -124,7 +126,8 @@
   const wrap = d => Math.atan2(Math.sin(d), Math.cos(d));
   function pickTarget(b){
     if (Math.random() < .25){ // wander anywhere, sometimes across the screen
-      b.tx = .08 + Math.random()*.84; b.ty = .1 + Math.random()*.8;
+      // fly over to the other flower column (crosses the text briefly, never lingers on it)
+      b.tx = b.hx < .5 ? .8 + Math.random()*.16 : .04 + Math.random()*.16; b.ty = .15 + Math.random()*.75;
     } else {                  // stay near its own flowers
       b.tx = b.hx + (Math.random()-.5)*.14; b.ty = b.hy + (Math.random()-.5)*.3;
     }
