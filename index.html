@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Engagement of Nurazreen &amp; Shahrul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#2a2226;--rose:#7a2f4a}
+  *{box-sizing:border-box;margin:0}
+  html,body{height:100%;background:#1c1418;overflow:hidden}
+  body{display:flex;align-items:center;justify-content:center}
+  /* 16:9 stage scaled to the screen via container units */
+  #stage{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;container-type:size;overflow:hidden;
+    background:radial-gradient(60% 70% at 50% 50%,#f6fbff 0%,#eef6fb 45%,#fbeaf1 100%);
+    font-family:'Cormorant Garamond',serif;color:var(--ink)}
+  .wash{position:absolute;border-radius:50%;filter:blur(3cqw);opacity:.55}
+  .w1{left:-6%;top:-10%;width:40%;height:55%;background:#f7c6d6}
+  .w2{right:-8%;bottom:-12%;width:42%;height:60%;background:#f4b3c9}
+  .w3{left:30%;top:60%;width:30%;height:40%;background:#dfeaf6;opacity:.7}
+  .w4{right:12%;top:-15%;width:30%;height:40%;background:#fbd9e4}
+  svg.deco{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2}
+  .title{font-family:'Allura',cursive;font-weight:400;font-size:8cqw;line-height:1;color:var(--rose);animation:rise 1.4s both}
+  .of{font-family:'Allura',cursive;font-size:5.4cqw;line-height:1;margin:1cqw 0 2cqw;animation:rise 1.4s .25s both}
+  .name{font-weight:600;font-size:3.6cqw;letter-spacing:.06em;line-height:1.35;animation:rise 1.4s .5s both}
+  .amp{font-size:3.6cqw;font-weight:600;animation:rise 1.4s .65s both}
+  .date{margin-top:3cqw;font-size:2cqw;letter-spacing:.14em;font-weight:600;animation:rise 1.4s .9s both}
+  .tag{margin-top:1.6cqw;font-family:'Great Vibes',cursive;font-size:2.4cqw;color:#6b5560;animation:rise 1.4s 1.1s both}
+  @keyframes rise{from{opacity:0;transform:translateY(2cqw)}to{opacity:1;transform:none}}
+  .petal{position:absolute;top:-6cqw;width:2cqw;height:2.6cqw;border-radius:100% 0 100% 0;
+    background:linear-gradient(135deg,#ffd3e1,#f08fb0);opacity:.8;z-index:1;animation:fall linear infinite}
+  @keyframes fall{to{transform:translate(var(--dx),115cqh) rotate(var(--rot))}}
+  #fs{position:fixed;right:10px;bottom:10px;z-index:9;border:0;border-radius:20px;padding:6px 12px;
+    background:#0006;color:#fff;font:12px sans-serif;cursor:pointer;opacity:0;transition:.3s}
+  body:hover #fs{opacity:.7}
+  @media (prefers-reduced-motion:reduce){.petal{display:none}*{animation:none!important}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><div class="wash w4"></div>
+
+  <svg class="deco" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <radialGradient id="pg" cx="50%" cy="85%" r="90%">
+        <stop offset="0" stop-color="#f06292"/><stop offset=".55" stop-color="#f8a8c5"/><stop offset="1" stop-color="#fde0ea"/>
+      </radialGradient>
+      <radialGradient id="pg2" cx="50%" cy="85%" r="90%">
+        <stop offset="0" stop-color="#e0407f"/><stop offset=".6" stop-color="#f48fb1"/><stop offset="1" stop-color="#fbd0df"/>
+      </radialGradient>
+      <g id="bloom">
+        <g fill="url(#pg)" stroke="#e8799f" stroke-width="1" stroke-opacity=".35">
+          <ellipse cx="0" cy="-62" rx="34" ry="66"/>
+          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(45)"/>
+          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(90)"/>
+          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(135)"/>
+          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(225)"/>
+          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(270)"/>
+          <ellipse cx="0" cy="-62" rx="34" ry="66" transform="rotate(315)"/>
+        </g>
+        <g fill="url(#pg2)" opacity=".85">
+          <ellipse cx="0" cy="-34" rx="20" ry="38" transform="rotate(22)"/>
+          <ellipse cx="0" cy="-34" rx="20" ry="38" transform="rotate(112)"/>
+          <ellipse cx="0" cy="-34" rx="20" ry="38" transform="rotate(202)"/>
+          <ellipse cx="0" cy="-34" rx="20" ry="38" transform="rotate(292)"/>
+        </g>
+        <circle r="13" fill="#f9c74f" opacity=".9"/>
+        <path d="M0 0v-24M0 0l17-17M0 0h24M0 0l17 17M0 0v24M0 0l-17 17M0 0h-24M0 0l-17-17" stroke="#d98a2b" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <g id="sprig" stroke="#e8799f" stroke-linecap="round" fill="none">
+        <path d="M0 0C10-40 30-70 60-90" stroke-width="3" stroke="#a5c79a"/>
+        <path d="M60-90l-14-26M60-90l6-30M60-90l24-22M60-90l-30-10M60-90l30 4" stroke-width="2.5"/>
+        <g fill="#f06292" stroke="none"><circle cx="46" cy="-116" r="4"/><circle cx="66" cy="-120" r="4"/><circle cx="84" cy="-112" r="4"/><circle cx="30" cy="-100" r="4"/><circle cx="90" cy="-86" r="4"/></g>
+      </g>
+      <g id="leaf" fill="#a9cfa0" opacity=".85"><path d="M0 0C30-30 80-30 110 0C80 30 30 30 0 0Z"/></g>
+    </defs>
+
+    <!-- bottom-left cluster -->
+    <use href="#leaf" transform="translate(40,620) rotate(-70) scale(1.1)"/>
+    <use href="#leaf" transform="translate(60,860) rotate(-20) scale(1.2)"/>
+    <use href="#bloom" transform="translate(70,730) scale(1.55) rotate(10)"/>
+    <use href="#bloom" transform="translate(250,900) scale(1.15) rotate(40)"/>
+    <use href="#bloom" transform="translate(30,520) scale(.75) rotate(70)"/>
+    <use href="#sprig" transform="translate(190,860) scale(1.1)"/>
+
+    <!-- top-right cluster -->
+    <use href="#leaf" transform="translate(1560,260) rotate(120) scale(1.1)"/>
+    <use href="#leaf" transform="translate(1330,40) rotate(40) scale(1.1)"/>
+    <use href="#bloom" transform="translate(1530,110) scale(1.7) rotate(-15)"/>
+    <use href="#bloom" transform="translate(1590,330) scale(1.05) rotate(25)"/>
+    <use href="#bloom" transform="translate(1350,20) scale(.85) rotate(60)"/>
+    <use href="#sprig" transform="translate(1560,380) scale(-.9,.9) rotate(-10)"/>
+
+    <!-- accents -->
+    <use href="#bloom" transform="translate(30,30) scale(.7) rotate(15)"/>
+    <use href="#sprig" transform="translate(150,10) scale(.8,-.8) rotate(10)"/>
+    <use href="#bloom" transform="translate(1590,880) scale(.9) rotate(30)"/>
+    <use href="#bloom" transform="translate(1440,900) scale(.65)"/>
+
+    <!-- ribbons -->
+    <g fill="none" stroke="#c88ac0" stroke-linecap="round" opacity=".7">
+      <path d="M190 250C260 340 170 420 250 520" stroke-width="6"/>
+      <path d="M205 250C285 340 195 420 270 520" stroke-width="2"/>
+      <path d="M1400 120C1330 220 1420 330 1350 450" stroke-width="6"/>
+      <path d="M1415 120C1345 220 1435 330 1365 450" stroke-width="2"/>
+    </g>
+  </svg>
+
+  <main class="card">
+    <h1 class="title" id="t">The Engagement</h1>
+    <div class="of">of</div>
+    <div class="name" id="n1">Nurazreen Azmi</div>
+    <div class="amp">&amp;</div>
+    <div class="name" id="n2">Muhamad Shahrul Hakimi</div>
+    <div class="date" id="d">05 October 2025 (Sunday)</div>
+    <div class="tag" id="tg">Starting Our Next Chapter Together</div>
+  </main>
+</div>
+<button id="fs" onclick="document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()">Fullscreen</button>
+<script>
+  // Customise via URL: ?n1=Name&n2=Name&date=...&tag=...&title=...
+  const q = new URLSearchParams(location.search);
+  [['n1','n1'],['n2','n2'],['d','date'],['tg','tag'],['t','title']].forEach(([id,k])=>{
+    if (q.get(k)) document.getElementById(id).textContent = q.get(k);
+  });
+  const st = document.getElementById('stage');
+  for (let i=0;i<14;i++){
+    const p = document.createElement('i'); p.className='petal';
+    p.style.left = Math.random()*100+'%';
+    p.style.setProperty('--dx',(Math.random()*16-8)+'cqw');
+    p.style.setProperty('--rot',(Math.random()*720-360)+'deg');
+    p.style.animationDuration = (11+Math.random()*10)+'s';
+    p.style.animationDelay = (-Math.random()*20)+'s';
+    st.appendChild(p);
+  }
+</script>
+</body>
+</html>
