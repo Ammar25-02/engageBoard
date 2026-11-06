@@ -6,25 +6,26 @@
 <title>The Engagement of Atiqah &amp; Ammar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="board.png">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="bg.png">
 <style>
   :root{--wine:#7d1430;--wine-dk:#5e0f24;--sage:#6f7f4a;--ink:#4f4440}
   *{box-sizing:border-box;margin:0}
-  [hidden]{display:none!important}
   html,body{height:100%;background:#fff;overflow:hidden}
   body{display:flex;align-items:center;justify-content:center}
   /* 16:9 stage scaled to the screen via container units; artwork fills it */
   #stage{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;container-type:size;overflow:hidden;
-    background:#fff url(board.png) center/cover no-repeat;
+    background:#fff url(bg.png) center/cover no-repeat;
     font-family:'Cormorant Garamond',serif;color:var(--ink)}
   .card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2}
-  .title{font-family:'Allura',cursive;font-weight:400;font-size:7.6cqw;line-height:1;color:var(--wine);animation:rise 1.4s both}
-  .of{font-family:'Allura',cursive;font-size:5cqw;line-height:1;margin:.6cqw 0 1.6cqw;color:var(--sage);animation:rise 1.4s .25s both}
-  .name{font-family:'Cinzel Decorative',serif;font-weight:700;font-size:5.6cqw;letter-spacing:.05em;line-height:1.15;color:var(--wine-dk);animation:rise 1.4s .5s both}
-  .amp{font-family:'Allura',cursive;font-size:5.6cqw;line-height:.9;color:var(--sage);animation:rise 1.4s .65s both}
-  .date{margin-top:2.6cqw;font-size:2cqw;letter-spacing:.14em;font-weight:600;color:var(--ink);animation:rise 1.4s .9s both}
-  .tag{margin-top:1.4cqw;font-family:'Great Vibes',cursive;font-size:2.4cqw;color:var(--wine);animation:rise 1.4s 1.1s both}
+  /* wording and layout follow the couple's design: the / Engagement / Of / logo / Ammar  Atiqah / date */
+  .the{font-family:'Alex Brush',cursive;font-size:5cqw;line-height:.9;color:var(--wine);animation:rise 1.4s both}
+  .title{font-family:'Alex Brush',cursive;font-weight:400;font-size:10cqw;line-height:.95;color:var(--wine);animation:rise 1.4s .15s both}
+  .of{font-family:'Alex Brush',cursive;font-size:6cqw;line-height:1;color:var(--wine);animation:rise 1.4s .3s both}
+  .logo{width:18cqw;height:auto;margin:.4cqw 0 -.6cqw;animation:rise 1.4s .45s both}
+  .names{display:flex;gap:16cqw;margin-top:-1.2cqw;animation:rise 1.4s .6s both}
+  .name{font-family:'Great Vibes',cursive;font-size:4.6cqw;line-height:1.1;color:var(--wine-dk)}
+  .date{margin-top:1.6cqw;font-size:2.5cqw;letter-spacing:.08em;font-weight:700;color:var(--wine);animation:rise 1.4s .8s both}
   @keyframes rise{from{opacity:0;transform:translateY(2cqw)}to{opacity:1;transform:none}}
 
   /* butterflies: JS moves the container, CSS flaps the wings */
@@ -46,15 +47,13 @@
 </head>
 <body>
 <div id="stage">
-  <!-- Text is part of board.png; this HTML version is kept hidden in case it's needed again -->
-  <main class="card" hidden>
-    <h1 class="title" id="t">The Engagement</h1>
-    <div class="of">of</div>
-    <div class="name" id="n1">Atiqah</div>
-    <div class="amp">&amp;</div>
-    <div class="name" id="n2">Ammar</div>
-    <div class="date" id="d">07 November 2026 (Saturday)</div>
-    <div class="tag" id="tg">A Story Written From School</div>
+  <main class="card">
+    <div class="the">the</div>
+    <h1 class="title">Engagement</h1>
+    <div class="of">Of</div>
+    <img class="logo" src="logo.png" alt="Ammar and Atiqah monogram">
+    <div class="names"><span class="name" id="n1">Ammar</span><span class="name" id="n2">Atiqah</span></div>
+    <div class="date" id="d">7 NOVEMBER 2026</div>
   </main>
 </div>
 <button id="fs" type="button" title="Fullscreen (F)" aria-label="Enter fullscreen"></button>
@@ -90,9 +89,9 @@
   wake();
 </script>
 <script>
-  // Customise via URL: ?n1=Name&n2=Name&date=...&tag=...&title=...
+  // Customise via URL: ?n1=Name&n2=Name&date=...
   const q = new URLSearchParams(location.search);
-  [['n1','n1'],['n2','n2'],['d','date'],['tg','tag'],['t','title']].forEach(([id,k])=>{
+  [['n1','n1'],['n2','n2'],['d','date']].forEach(([id,k])=>{
     if (q.get(k)) document.getElementById(id).textContent = q.get(k);
   });
 
